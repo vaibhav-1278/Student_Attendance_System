@@ -31,6 +31,6 @@ app.use(session({ secret: 'your-secret-key', resave: false, saveUninitialized: f
 app.use("/", common_routes);
 app.use("/admin", admin_routes);
 
-app.listen(process.env.PORT || 1000, function () {
-    console.log("server started");
+app.listen(process.env.PORT || 3000, function () {
+    console.log("Server started");
 });
