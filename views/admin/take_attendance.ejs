@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Take Attendance</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="/css/admin_dashbord.css">
+
+    <style>
+    
+
+        :root {
+            --indigo-50:  #eef2ff;
+            --indigo-100: #e0e7ff;
+            --indigo-500: #6366f1;
+            --indigo-600: #4f46e5;
+            --indigo-700: #4338ca;
+
+            --emerald-50:  #ecfdf5;
+            --emerald-500: #10b981;
+            --emerald-600: #059669;
+
+            --purple-50:  #f5f3ff;
+            --purple-500: #8b5cf6;
+
+            --red-50:  #fef2f2;
+            --red-500: #ef4444;
+            --red-600: #dc2626;
+
+            --gray-50:  #f8fafc;
+            --gray-100: #f1f5f9;
+            --gray-200: #e2e8f0;
+            --gray-400: #94a3b8;
+            --gray-500: #64748b;
+            --gray-700: #334155;
+            --gray-900: #0f172a;
+
+            --white: #ffffff;
+
+            --radius-sm: 10px;
+            --radius-md: 14px;
+            --radius-lg: 18px;
+
+            --shadow-sm: 0 1px 2px rgba(15, 23, 42, .06);
+            --shadow-md: 0 6px 18px -6px rgba(15, 23, 42, .10);
+
+            --font-head: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+            --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--gray-700);
+            background: var(--gray-50);
+            -webkit-font-smoothing: antialiased;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-head);
+            color: var(--gray-900);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin: 0;
+        }
+
+        .container.mt-4 {
+            max-width: 960px;
+            padding-top: 2rem !important;
+            padding-bottom: 3rem;
+        }
+
+        h3.mb-4 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--gray-900);
+            letter-spacing: -0.03em;
+            margin-bottom: 1.75rem !important;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--gray-100);
+        }
+
+        form.row.mb-4 {
+            background: var(--white);
+            border: 1px solid var(--gray-100);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem 1.5rem 1.25rem;
+            box-shadow: var(--shadow-sm);
+            margin-bottom: 1.75rem !important;
+            margin-left: 0;
+            margin-right: 0;
+        }
+
+        .form-label {
+            font-size: .84rem;
+            font-weight: 600;
+            color: var(--gray-700);
+            margin-bottom: .45rem;
+        }
+
+        .form-control,
+        .form-select {
+            height: 48px;
+            border: 1.5px solid var(--gray-200);
+            border-radius: var(--radius-sm);
+            font-size: .92rem;
+            color: var(--gray-900);
+            transition: border-color .2s ease, box-shadow .2s ease;
+        }
+
+        .form-control:focus,
+        .form-select:focus {
+            border-color: var(--indigo-500);
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, .15);
+            outline: none;
+        }
+
+        .btn-primary {
+            height: 48px;
+            background: linear-gradient(135deg, var(--indigo-600), var(--indigo-500));
+            border: none;
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            font-size: .9rem;
+            padding: 0 1.35rem;
+            box-shadow: 0 6px 16px -6px rgba(79, 70, 229, .55);
+            transition: all .25s ease;
+        }
+
+        .btn-primary:hover,
+        .btn-primary:focus {
+            background: linear-gradient(135deg, var(--indigo-700), var(--indigo-600));
+            border: none;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 22px -8px rgba(79, 70, 229, .65);
+        }
+
+        table.table {
+            background: var(--white);
+            border: 1px solid var(--gray-100);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            margin-bottom: 1.5rem;
+            border-collapse: separate;
+            border-spacing: 0;
+            width: 100%;
+        }
+
+        table.table thead th {
+            background: var(--gray-50);
+            font-size: .78rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .06em;
+            color: var(--gray-500);
+            padding: 1rem 1.25rem;
+            border-bottom: 1px solid var(--gray-100);
+            border-top: none;
+            white-space: nowrap;
+        }
+
+        table.table tbody td {
+            padding: 1rem 1.25rem;
+            font-size: .9rem;
+            color: var(--gray-700);
+            border-bottom: 1px solid var(--gray-100);
+            vertical-align: middle;
+            border-top: none;
+        }
+
+        table.table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        table.table tbody tr {
+            transition: background .2s ease;
+        }
+
+        table.table tbody tr:hover {
+            background: var(--gray-50);
+        }
+
+        table.table tbody td:first-child {
+            font-weight: 600;
+            color: var(--indigo-700);
+        }
+
+        .badge.bg-success {
+            background: var(--emerald-50) !important;
+            color: var(--emerald-600) !important;
+            font-size: .78rem;
+            font-weight: 700;
+            padding: .4rem .85rem;
+            border-radius: 999px;
+            display: inline-flex;
+            align-items: center;
+            gap: .35rem;
+        }
+
+        .badge.bg-success::before {
+            content: "";
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--emerald-500);
+        }
+
+        .badge.bg-danger {
+            background: var(--red-50) !important;
+            color: var(--red-600) !important;
+            font-size: .78rem;
+            font-weight: 700;
+            padding: .4rem .85rem;
+            border-radius: 999px;
+            display: inline-flex;
+            align-items: center;
+            gap: .35rem;
+        }
+
+        .badge.bg-danger::before {
+            content: "";
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--red-500);
+        }
+
+        .btn-success.btn-sm {
+            background: var(--emerald-50);
+            color: var(--emerald-600);
+            border: 1px solid rgba(16, 185, 129, .2);
+            border-radius: var(--radius-sm);
+            font-size: .8rem;
+            font-weight: 600;
+            padding: .45rem .9rem;
+            transition: all .2s ease;
+        }
+
+        .btn-success.btn-sm:hover {
+            background: var(--emerald-600);
+            color: #fff;
+            border-color: var(--emerald-600);
+        }
+
+        .btn-danger.btn-sm {
+            background: var(--red-50);
+            color: var(--red-600);
+            border: 1px solid rgba(239, 68, 68, .2);
+            border-radius: var(--radius-sm);
+            font-size: .8rem;
+            font-weight: 600;
+            padding: .45rem .9rem;
+            transition: all .2s ease;
+        }
+
+        .btn-danger.btn-sm:hover {
+            background: var(--red-600);
+            color: #fff;
+            border-color: var(--red-600);
+        }
+
+        #cameraSection.mt-4 {
+            background: var(--white);
+            border: 1px solid var(--gray-100);
+            border-radius: var(--radius-lg);
+            padding: 1.75rem;
+            box-shadow: var(--shadow-md);
+            margin-top: 1.5rem !important;
+        }
+
+        #cameraSection h5 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--gray-900);
+            margin-bottom: 1rem;
+        }
+
+        #video {
+            border-radius: var(--radius-md);
+            border: 2px solid var(--indigo-100);
+            background: linear-gradient(135deg, var(--indigo-50), var(--purple-50));
+            display: block;
+            max-width: 100%;
+            margin-bottom: 1rem;
+        }
+
+        #message {
+            font-size: .88rem;
+            color: var(--gray-500);
+            background: var(--gray-50);
+            border: 1px dashed var(--gray-200);
+            border-radius: var(--radius-sm);
+            padding: .75rem 1rem;
+            margin: .75rem 0 1rem;
+        }
+
+        #verifyFaceBtn {
+            background: linear-gradient(135deg, var(--indigo-600), var(--indigo-500));
+            border: none;
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            font-size: .9rem;
+            padding: .7rem 1.35rem;
+            box-shadow: 0 6px 16px -6px rgba(79, 70, 229, .55);
+            transition: all .25s ease;
+        }
+
+        #verifyFaceBtn:hover {
+            background: linear-gradient(135deg, var(--indigo-700), var(--indigo-600));
+            transform: translateY(-2px);
+            box-shadow: 0 10px 22px -8px rgba(79, 70, 229, .65);
+        }
+
+        @media (max-width: 767.98px) {
+            form.row.mb-4 {
+                padding: 1.25rem 1.15rem;
+            }
+
+            .btn-primary {
+                width: 100%;
+            }
+
+            table.table thead th,
+            table.table tbody td {
+                padding: .8rem .9rem;
+                font-size: .84rem;
+            }
+
+            #cameraSection.mt-4 {
+                padding: 1.25rem;
+            }
+
+            #video {
+                width: 100%;
+                height: auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+<div class="admin-layout">
+    <%- include('navbar') %>
+    <main class="main-content">
+<div class="container mt-4">
+
+    <h3 class="mb-4">
+        <button type="button" class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+            <i class="bi bi-list"></i>
+        </button>
+        Take Attendance
+    </h3>
+
+    <form action="/admin/take_attendance" method="GET" class="row mb-4">
+
+        <div class="col-md-4">
+            <label class="form-label">Attendance Date</label>
+            <input type="date" name="attendance_date"
+                   class="form-control"
+                   value="<%= attendance_date %>" required>
+        </div>
+<div class="col-md-4">
+            <label class="form-label">Student Class</label>
+            <select name="student_class" class="form-select" required>
+                <option value="">Select a class</option>
+
+                <% for (var j = 0; j < classes.length; j++) { %>
+                    <option value="<%= classes[j].student_class %>"
+                        <%= selected_class === classes[j].student_class ? "selected" : "" %>>
+                        <%= classes[j].student_class %>
+                    </option>
+                <% } %>
+            </select>
+        </div>
+
+        <div class="col-md-4 d-flex align-items-end">
+            <button type="submit" class="btn btn-primary">
+                Show Students
+            </button>
+        </div>
+
+    </form>
+ <% if (selected_class && attendance_date) { %>
+
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Roll No</th>
+                    <th>Student Name</th>
+                    <th>Attendance Status</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <% for (var i = 0; i < data.length; i++) { %>
+                    <tr>
+                        <td><%= data[i].student_roll_no %></td>
+                        <td><%= data[i].student_name %></td>
+ <td>
+                            <% if (data[i].attendance_status) { %>
+
+                                <span class="badge <%= data[i].attendance_status === 'Present' ? 'bg-success' : 'bg-danger' %>">
+                                    <%= data[i].attendance_status %>
+                                </span>
+
+                            <% } else { %>
+
+                                <form id="attendanceForm<%= data[i].student_id %>"
+                                      action="/admin/save_attendance"
+                                      method="POST"
+                                      class="d-flex gap-2">
+
+                                    <input type="hidden" name="student_id"
+                                           value="<%= data[i].student_id %>">
+
+                                    <input type="hidden" name="attendance_date"
+                                           value="<%= attendance_date %>">
+
+                                    <input type="hidden" name="student_class"
+                                           value="<%= selected_class %>">
+
+                                    <button type="button"
+                                            class="btn btn-success btn-sm"
+                                            onclick="scanFace(this.form, this)">
+                                        Take Attendance
+                                    </button>
+
+                                    <button type="submit"
+                                            name="status"
+                                            value="Absent"
+                                            class="btn btn-danger btn-sm">
+                                        Absent
+                                    </button>
+
+                                </form>
+
+                            <% } %>
+                        </td>
+                    </tr>
+                <% } %>
+            </tbody>
+ </table>
+
+    <% } %>
+
+    <div id="cameraSection" class="mt-4" style="display:none;">
+
+        <h5>Verify Student Face</h5>
+
+        <video id="video" width="320" height="240"
+               autoplay muted playsinline></video>
+
+        <p id="message" role="status"></p>
+
+        <button type="button" id="verifyFaceBtn"
+                class="btn btn-primary">
+            Verify Face
+        </button>
+
+    </div>
+
+</div>
+
+    <%- include('footer') %>
+    </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script type="module" src="/js/take_attendance.js"></script>
+<script>
+    const sidebar = document.getElementById("sidebar");
+    const toggle = document.getElementById("sidebarToggle");
+    const backdrop = document.getElementById("sidebarBackdrop");
+
+    toggle.addEventListener("click", function() {
+        sidebar.classList.toggle("show");
+        backdrop.classList.toggle("show");
+    });
+
+    backdrop.addEventListener("click", function() {
+        sidebar.classList.remove("show");
+        backdrop.classList.remove("show");
+    });
+</script>
+
+</body>
+</html>
